@@ -62,13 +62,14 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
 
-    // Compose UI
+    // Dodane zależności z Grupy 2:
+    implementation("androidx.core:core-ktx:1.8.0")
     implementation("androidx.compose.ui:ui:1.5.1")
-    implementation("androidx.compose.material3:material3:1.2.0") // Material Design 3
+    implementation("androidx.compose.material:material:1.5.1")
     implementation("androidx.compose.ui:ui-tooling-preview:1.5.1")
-    implementation("androidx.compose.material:material:1.1.1")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.5.1")
+    implementation("androidx.activity:activity-compose:1.5.1")
     implementation("androidx.navigation:navigation-compose:2.5.3")
-
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
@@ -78,8 +79,13 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
-
+    // Dodane zależności z Grupy 2:
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.3")
-    implementation(kotlin("script-runtime"))
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.5.1")
+    debugImplementation("androidx.compose.ui:ui-tooling:1.5.1")
+    debugImplementation("androidx.compose.ui:ui-test-manifest:1.5.1")
+
+    implementation("io.coil-kt:coil-compose:2.2.2")
 }

@@ -54,18 +54,13 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            Kurs1Theme {
+            MyApp {
                 MovieNavigation()
             }
         }
     }
 }
 
-
-@Composable
-fun Greeting(name:String){
-    Text(text = "Hello $name!")
-}
 
 @Composable
 fun MainContent(movieList:List<String> = listOf("Avatar", "3000", "PBS", "Christmas is Coming", "03.12.2022", "Cat", "dog", "bon appétit")){
@@ -89,8 +84,8 @@ fun MovieRow(movie: String, onItemClick: (String) -> Unit = {}) {
             .clickable {
                 onItemClick(movie)
             },
-        shape = RoundedCornerShape(corner = CornerSize(26.dp)),
-        elevation = 16.dp
+        shape = RoundedCornerShape(corner = CornerSize(16.dp)),
+        elevation = 6.dp
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -110,11 +105,19 @@ fun MovieRow(movie: String, onItemClick: (String) -> Unit = {}) {
     }
 }
 
+
+@Composable
+fun MyApp(content :@Composable ()->Unit){
+    Kurs1Theme {
+        content()
+    }
+}
+
 @Preview(showBackground = true)
 @Composable
 fun  DefaultPreviev() {
 
-    Kurs1Theme {
-        Greeting("Android")
+    MyApp {
+        MovieNavigation()
     }
 }

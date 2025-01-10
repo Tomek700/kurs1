@@ -1,3 +1,5 @@
+package com.example.kurs1.screens.home
+
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -13,6 +15,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.kurs1.MovieRow
 import android.util.Log
+import com.example.kurs1.navigation.MovieScreens
 
 
 @Composable
@@ -24,20 +27,20 @@ fun HomeScreen(navController: NavController)
                 backgroundColor=Color.Magenta,
                 elevation=5.dp
             ) {
-                Text(text = "Movies TopAppBar")
+                Text(text = "Movies ")
             }
         },
-        ) {it->Column (
-            modifier = Modifier
-                .padding(it))
+    ) {it->Column (
+        modifier = Modifier
+            .padding(it))
     { MainContent(navController=navController)
-        }
-        }
+    }
+    }
 }
 
 @Composable
 fun MainContent(navController: NavController,
-                movieList:List<String> = listOf(
+                moviesList:List<String> = listOf(
                     "Avatar",
                     "555",
                     "Harry Potter",
@@ -48,10 +51,10 @@ fun MainContent(navController: NavController,
                 )){
     Column(modifier=Modifier.padding(12.dp)){
         LazyColumn {
-            items(items = movieList){
-                Text(text=it)
-                MovieRow(movie=it){movie -> Log.d("TAG", "MainContent:$movie")}
-                //MovieRow(movie=it){movie->navController.navigate(route=MovieScreens.DetailScreen.name+"/$movie")}
+            items(items = moviesList){
+                //Text(text=it)
+                //MovieRow(movie=it){movie -> Log.d("TAG", "MainContent:$movie")}
+                MovieRow(movie=it){movie->navController.navigate(route=MovieScreens.DetailsScreen.name+"/$movie")}
             }
         }
     }
