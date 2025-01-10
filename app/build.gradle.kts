@@ -67,6 +67,8 @@ dependencies {
     implementation("androidx.compose.material3:material3:1.2.0") // Material Design 3
     implementation("androidx.compose.ui:ui-tooling-preview:1.5.1")
     implementation("androidx.compose.material:material:1.1.1")
+    implementation("androidx.navigation:navigation-compose:2.5.3")
+
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
@@ -79,4 +81,5 @@ dependencies {
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.3")
+    implementation(kotlin("script-runtime"))
 }
