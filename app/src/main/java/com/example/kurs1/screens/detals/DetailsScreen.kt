@@ -16,10 +16,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
+import com.example.kurs1.widgets.MovieRow
+import com.example.kurs1.model.Movie
+import com.example.kurs1.model.getMovies
 
-
+@SuppressLint("UnusedTransitionTargetStateParameter")
 @Composable
-fun DetailsScreen(navController: NavController, movieData: String?) {
+fun DetailsScreen(navController: NavController, movieId: Int?) {
+    val newMovieList = getMovies().filter { movie -> movie.id == movieId }
     Scaffold(
         topBar = {
             TopAppBar(backgroundColor = Color.LightGray, elevation = 5.dp) {
@@ -30,22 +34,33 @@ fun DetailsScreen(navController: NavController, movieData: String?) {
                             navController.popBackStack()
                         })
                     Spacer(modifier = Modifier.width(16.dp))
-                    Text(text = "Movie Details")
+                    Text(text = "Movies")
                 }
             }
         }
-    ) { paddingValues ->
-        Column(modifier = Modifier.padding(paddingValues)) {
-            Surface(modifier = Modifier
-                .fillMaxHeight()
-                .fillMaxWidth()) {
-                Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
-                    Text(text = movieData.toString(), style = MaterialTheme.typography.h5)
-                    Spacer(modifier = Modifier.height(23.dp))
-                    Button(onClick = { navController.popBackStack() }) {
-                        Text(text = "Go Back")
-                    }
-                }
+    ) {
+        Surface(modifier = Modifier.fillMaxHeight().fillMaxWidth()) {
+            Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
+                MovieRow(movie = newMovieList.first())
+                Spacer(modifier = Modifier.height(8.dp))
+                Divider()
+                Text(text = "Movie Images")
+                HorizontalScrollableImagesView(newMovieList)
+            }
+        }
+    }
+}
+
+@Composable
+private fun HorizontalScrollableImagesView(newMovieList: List<Movie>) {
+    LazyRow {
+        items(newMovieList[0].images.size) { index ->
+            Card(modifier = Modifier.padding(12.dp).size(240.dp), elevation = 5.dp) {
+                val painter = rememberAsyncImagePainter(newMovieList[0].images[index])
+                Image(
+                    painter = painter,
+                    contentDescription = "Movie Image",
+                )
             }
         }
     }

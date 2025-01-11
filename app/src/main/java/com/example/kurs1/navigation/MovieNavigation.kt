@@ -10,7 +10,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 
-
 @Preview
 @Composable
 fun MovieNavigation() {
@@ -24,13 +23,12 @@ fun MovieNavigation() {
             HomeScreen(navController = navController)
         }
         composable(
-            MovieScreens.DetailsScreen.name + "/{movie}",
-            arguments = listOf(navArgument(name = "movie") { type = NavType.StringType })
+            MovieScreens.DetailsScreen.name + "/{move}",
+            arguments = listOf(navArgument(name = "move") { type = NavType.IntType })
         ) { backStackEntry ->
 
-            DetailsScreen(navController = navController, movieData =  backStackEntry.arguments?.getString("movie"))
+            DetailsScreen(navController = navController, movieId = backStackEntry.arguments?.getInt("move"))
 
         }
     }
 }
-
